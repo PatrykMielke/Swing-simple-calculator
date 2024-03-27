@@ -9,6 +9,7 @@ public class GUI extends JFrame implements ActionListener {
 
     JButton button;
     JPanel buttonPanel;
+    JTextField field;
     public GUI() {
         // Użycie kontruktora klasy nadrzędnej
 
@@ -16,6 +17,9 @@ public class GUI extends JFrame implements ActionListener {
         setSize(APP_SIZE[0], APP_SIZE[1]);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
+        setLocationRelativeTo(null);
+        setLayout(null);
+
 
         addComponents();
         setVisible(true);
@@ -23,32 +27,35 @@ public class GUI extends JFrame implements ActionListener {
 
     private void addComponents() {
         addPanels();
-        addLabels();
         addButtons();
+        addTextFields();
     }
 
     private void addPanels() {
         buttonPanel = new JPanel();
-        buttonPanel.setBounds(10, 190, 380, 400);
-        buttonPanel.setSize(380,400);
+        buttonPanel.setBounds(0, 100, 385, 440);
         buttonPanel.setBackground(Color.red);
-        buttonPanel.setLayout(new GridLayout(4,4));
+        buttonPanel.setLayout(new GridLayout(4,4,5,5));
 
         add(buttonPanel);
     }
 
-    private void addLabels() {
+    private void addTextFields(){
+        field = new JTextField();
+        field.setEditable(false);
+        field.setBounds(0,0,APP_SIZE[0],100 );
+        field.setText(APP_TITLE);
+        add(field);
     }
 
     private void addButtons() {
-        for (int i = 0; i < 12; i++) {
-            button = new JButton( Integer.toString(i) );
-
-            buttonPanel.add(button);
+        for (String[] buttonText : BUTTON_TEXTS) {
+            for (String s : buttonText) {
+                button = new JButton(s);
+                buttonPanel.add(button);
+            }
         }
-
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
