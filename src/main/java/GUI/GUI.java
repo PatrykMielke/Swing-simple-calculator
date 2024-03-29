@@ -48,7 +48,7 @@ public class GUI extends JFrame implements ActionListener {
         field.setBounds(20,20,APP_SIZE[0]-50,60 );
         field.setFont(new Font("Arial", Font.BOLD, 30));
         field.setText(fieldValue);
-        field.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        field.setHorizontalAlignment(JTextField.RIGHT);
         add(field);
     }
 
