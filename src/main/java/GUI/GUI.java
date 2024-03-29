@@ -1,9 +1,13 @@
 package GUI;
+import java.util.ArrayList;
 import javax.swing.*;
-import java.awt.*;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.EventObject;
+import java.util.List;
 
 import static ConstantValues.ConstantValues.*;
 
@@ -13,8 +17,7 @@ public class GUI extends JFrame implements ActionListener {
     JPanel buttonPanel;
     JTextField field;
     String fieldValue = "0";
-    float number1;
-    float number2;
+    List<String> operations = new ArrayList<>();
     public GUI() {
         // Użycie kontruktora klasy nadrzędnej
 
@@ -78,6 +81,7 @@ public class GUI extends JFrame implements ActionListener {
                     else{
                         fieldValue += clickedButton;
                     }
+                    field.setText(fieldValue);
                 }
                 // a dot
                 else if(clickedButton.matches("[.]")){
@@ -85,14 +89,21 @@ public class GUI extends JFrame implements ActionListener {
                         fieldValue += clickedButton;
                         System.out.println(fieldValue);
                     }
+                    field.setText(fieldValue);
                 }
                 else if(clickedButton.matches("[+]")){
-                    number1 = Float.parseFloat(fieldValue);
-                    fieldValue = "0";
-                }
+                    operations.add(fieldValue);
 
-                // refresh
-                field.setText(fieldValue);
+                    if (operations.size() == 1){
+                        field.setText("");
+                        double sum = 0d;
+                        for(String operation : operations){
+                            sum += Double.parseDouble(operation);
+                        }
+                        fieldValue = Double.toString(sum);
+                        operations.clear();
+                    }
+                }
             }
         }
         catch (Exception exception){
